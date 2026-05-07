@@ -87,7 +87,7 @@ class _WordActionsPageState extends State<WordActionsPage>{
 
                 widget.onSave(updatedWord);
                 HapticFeedback.vibrate();
-                Navigator.pop(context);
+                // Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 77, 183, 58),
@@ -99,6 +99,7 @@ class _WordActionsPageState extends State<WordActionsPage>{
               onPressed: (){
                 widget.onDelete(widget.word.id!);
                 HapticFeedback.heavyImpact();
+                Navigator.pop(context);
               }, 
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 77, 183, 58),

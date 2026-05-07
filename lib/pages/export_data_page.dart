@@ -22,7 +22,7 @@ class _ExportDataPageState extends State<ExportDataPage>{
      final jsonString = await SQLiteDatabase.instance.exportDatabaseToJson();
     final bytes = utf8.encode(jsonString);
      exportedFilePath = await FileSaver.instance.saveAs(
-        name: 'isky_backup',
+        name: 'iskai_backup',
         bytes: bytes,
         fileExtension: 'json',
         mimeType: MimeType.json,

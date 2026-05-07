@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.1+4
+version: 1.2.2+7
 
 environment:
   sdk: ^3.9.2
@@ -80,7 +80,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/imgs/isky-icon3.jpg"
+  image_path: "assets/imgs/iskai_new_year.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
   web:
     generate: true
@@ -127,13 +127,29 @@ flutter:
     - assets/imgs/dictionary-icon.png
     - assets/imgs/timer-icon.png
     - assets/imgs/star.png
-    - assets/imgs/first_word.png
-    - assets/imgs/novice.png
-    - assets/imgs/antuziast.png
-    - assets/imgs/mudrezh.png
-    - assets/imgs/knowledge.png
-    - assets/imgs/guru.png
+    # - assets/imgs/first_word.png
+    # - assets/imgs/novice.png
+    # - assets/imgs/antuziast.png
+    # - assets/imgs/mudrezh.png
+    # - assets/imgs/knowledge.png
+    # - assets/imgs/guru.png
     - assets/animations/fire.gif
+    # - assets/imgs/comparison.png
+    - assets/imgs/comparison3.png
+    - assets/imgs/anki.png
+    - assets/imgs/first_word3.png
+    - assets/imgs/guru2.png
+    - assets/imgs/knowledge2.png
+    - assets/imgs/mudrezh2.png
+    - assets/imgs/novice3.png
+    - assets/imgs/antuziast2.png
+    - assets/imgs/50days2.png
+    - assets/imgs/100days2.png
+    - assets/imgs/everything2.png
+    - assets/imgs/light_64px.png
+    # - assets/imgs/light_512px.png
+    - assets/imgs/iskai_new_year.png
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -147,12 +163,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+  fonts:
+    - family: RussoOne
+      fonts:
+        - asset: assets/fonts/RussoOne-Regular.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

@@ -51,9 +51,9 @@ extension AchievementLocalization on AppLocalizations{
       case 9:
         return achievementDescription9;
       case 10:
-      return achievementDescription9;
+      return achievementDescription10;
       case 11:
-      return achievementDescription9;
+      return achievementDescription11;
       default:
         return "";
     }

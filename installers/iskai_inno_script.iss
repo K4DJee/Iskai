@@ -3,7 +3,7 @@
 ; Non-commercial use only
 
 #define MyAppName "Iskai"
-#define MyAppVersion "1.0.1"
+#define MyAppVersion "1.2.0"
 #define MyAppPublisher "K4DJE Studio"
 #define MyAppURL "https://k4djestback.tech/"
 #define MyAppExeName "iskai.exe"
@@ -52,6 +52,7 @@ Source: "C:\Users\Dima\Desktop\en_path\isky-flattern\iskai\build\windows\x64\run
 Source: "C:\Users\Dima\Desktop\en_path\isky-flattern\iskai\build\windows\x64\runner\Release\flutter_windows.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Dima\Desktop\en_path\isky-flattern\iskai\build\windows\x64\runner\Release\permission_handler_windows_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Dima\Desktop\en_path\isky-flattern\iskai\build\windows\x64\runner\Release\url_launcher_windows_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Dima\Desktop\en_path\isky-flattern\iskai\build\windows\x64\runner\Release\share_plus_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Dima\Desktop\en_path\isky-flattern\iskai\build\windows\x64\runner\Release\data\*"; DestDir: "{app}\data"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 

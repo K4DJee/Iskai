@@ -1,5 +1,7 @@
 import 'package:iskai/database/sqfliteDatabase.dart';
+import 'package:iskai/models/achievement.dart';
 import 'package:iskai/models/achivement_update_result.dart';
+import 'package:iskai/models/daily_streak_info.dart';
 import 'package:iskai/models/folders.dart';
 import 'package:iskai/models/statistics.dart';
 import 'package:iskai/models/streak_update_result.dart';
@@ -148,13 +150,31 @@ class DatabaseService {
   }
 }
 
+Future<void> deleteDatabaseFile()async{
+  try{
+    await _db.deleteDatabaseFile();
+  }
+  catch(e){
+    print('Ошибка: $e');
+    rethrow;
+  }
+}
+
 Future<AchievementUpdateResult> updateProcessOfAchievement(int id, int newProgress)async{
   try{
     int result = await _db.updateProcessOfAchievement(id, newProgress);
     if(result != -1 && result != 0 ){
       print('Достижение разблокировано!');
+    Achievement? achievement = await _db.getAchivementInfo(result);
+     if (achievement == null) {
+        print('Ошибка: достижение с ID $result не найдено в БД!');
+        return AchievementUpdateResult.failure(
+          message: 'Не удалось загрузить информацию о разблокированном достижении.',
+        );
+      }
       return AchievementUpdateResult.success(
           unlocked: true,
+          achivementName: achievement.name,
           message: 'Достижение разблокировано!',
       );
     } 
@@ -175,9 +195,52 @@ Future<AchievementUpdateResult> updateProcessOfAchievement(int id, int newProgre
   }
 }
 
+Future<AchievementUpdateResult> updateProcessOfStreakInAchivement(List<int> ids, int newProgress)async{
+  try{
+    int result = await _db.updateProcessOfStreakInAchivement(ids, newProgress);
+    if(result != -1 && result != 0 ){
+    Achievement? achievement = await _db.getAchivementInfo(result);
+    if (achievement == null) {
+        print('Ошибка: достижение с ID $result не найдено в БД!');
+        return AchievementUpdateResult.failure(
+          message: 'Не удалось загрузить информацию о разблокированном достижении.',
+        );
+      }
+      return AchievementUpdateResult.success(
+          achId: result,
+          unlocked: true,
+          achivementName: achievement.name,
+          message: 'Достижение разблокировано!',
+      );
+    } 
+    else if(result == -1){
+      print('Прогресс достижения обновлён');
+      return AchievementUpdateResult.success(
+          unlocked: false,
+          message: 'Прогресс обновлён!',
+        );
+    }
+    else{
+      print('Прогресс достижения не обновлён');
+      return AchievementUpdateResult.success(
+          unlocked: false,
+          message: 'Прогресс не обновлён!',
+        );
+    }
+  }
+  catch(e){
+    print("Ошибка updateProcessOfStreakInAchivement: $e");
+    return AchievementUpdateResult.failure(
+        message: 'Достижение разблокировано!',
+    );
+  }
+}
+
 Future<StreakUpdateResult> createUserStatistics(UserStatistics userStatistics)async{
   try{
+    
     int result = await _db.createUserStatistics(userStatistics);
+    print("streak: ${result}");
     if(result == 0){
       print('Стрик не надо ещё обновлять');
     }
@@ -189,5 +252,20 @@ Future<StreakUpdateResult> createUserStatistics(UserStatistics userStatistics)as
     return StreakUpdateResult.failure(message: 'Ошибка в работе с ударным режимом');
   }
 }
+
+Future<Achievement?> getAchivementInfo(int id)async{
+  return await _db.getAchivementInfo(id);
+}
+
+Future<DailyStreakInfo> getDailyStreakInfo()async{
+  try{
+    return await _db.getDailyStreakInfo();
+  }
+  catch(e){
+    print('Ошибка: $e');
+    return DailyStreakInfo(currentStreak: 0, maxDailyStreak: 0);
+  }
+}
+
 
 }

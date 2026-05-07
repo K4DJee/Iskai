@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iskai/l10n/app_localizations.dart';
-import 'package:iskai/pages/LocalSyncPage.dart';
+import 'package:iskai/pages/local_sync_page.dart';
 import 'package:iskai/pages/incomplete_page.dart';
 
 class SyncPage extends StatefulWidget{

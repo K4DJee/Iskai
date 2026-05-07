@@ -9,16 +9,16 @@ class AppLocalizationsFr extends AppLocalizations {
   AppLocalizationsFr([String locale = 'fr']) : super(locale);
 
   @override
-  String get languageNameEn => 'Anglais';
+  String get languageNameEn => 'English';
 
   @override
-  String get languageNameRu => 'Russe';
+  String get languageNameRu => 'Русский';
 
   @override
   String get languageNameFr => 'Français';
 
   @override
-  String get languageNameEs => 'Espagnol';
+  String get languageNameEs => 'Español';
 
   @override
   String get appTitle => 'Iskai';
@@ -228,6 +228,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get achievementsPage => 'Réalisations';
 
   @override
+  String get achievementReceived => 'Réalisation reçue!';
+
+  @override
   String get privacyPolicyTitle => 'Politique de confidentialité';
 
   @override
@@ -417,7 +420,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get achievementName10 => 'Maître';
 
   @override
-  String get achievementDescription10 => 'Apprends 100 mots.';
+  String get achievementDescription10 => 'Apprends 125 mots.';
 
   @override
   String get achievementName11 => 'Gourou social';
@@ -429,10 +432,76 @@ class AppLocalizationsFr extends AppLocalizations {
   String get unlockedStatus => 'déverrouillé';
 
   @override
+  String get errorFetchUrl => 'Impossible d\'ouvrir le lien';
+
+  @override
+  String get dbLoading => 'Téléchargement...';
+
+  @override
+  String get dbSize => 'taille de la base de données:';
+
+  @override
+  String get warningTitleInModal => 'Avertissement';
+
+  @override
+  String get deleteDbTitle => 'Supprimer la base de données';
+
+  @override
+  String get deleteDbDescInModal => 'Êtes-vous sûr de vouloir supprimer la base de données? Toutes les données seront définitivement supprimées.';
+
+  @override
+  String get doNotDeleteDbBtnInModal => 'Ne pas supprimer';
+
+  @override
+  String get deleteDbBtnInModal => 'Supprimer';
+
+  @override
+  String get notNowBtnInModal => 'Pas maintenant';
+
+  @override
+  String get writeReviewBtnInModal => 'Écrire un commentaire';
+
+  @override
+  String get importantTitleInModal => 'Informations importantes';
+
+  @override
+  String get rateUsDescInModal => 'Aimez-vous Iskai? Veuillez nous évaluer à RuStore. Votre support affecte directement la fréquence des mises à jour.';
+
+  @override
+  String get displayNotificationsTitle => 'Afficher les notifications de l\'application';
+
+  @override
+  String get interactionWithTheDB => 'Interaction avec la base de données';
+
+  @override
+  String get wordsPassed => 'Mots passés:';
+
+  @override
   String get streakTitle => 'consécutifs';
 
   @override
   String get comparisonMinigameTitle => 'Comparaison de mots et traduction';
+
+  @override
+  String get comparisonPositionTitle => 'Faites correspondre correctement le mot avec sa traduction.';
+
+  @override
+  String get lackOfChartTitle => 'Vous n\'avez pas encore de statistiques';
+
+  @override
+  String get wordAreOver => 'Les mots sont terminés';
+
+  @override
+  String get errorUpdAch => 'Erreur lors de la mise à jour';
+
+  @override
+  String get wrongWordTryAgain => 'Mauvais mot, essayez à nouveau.';
+
+  @override
+  String get errSwitchingToTheNextTransl => 'Erreur lors du passage à la traduction suivante d\'un mot:';
+
+  @override
+  String get trainingIsOver => 'L\'entraînement est terminé.';
 
   @override
   String get stillInDevelopment => 'Encore en développement';
@@ -702,7 +771,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get interfaceAppColor => 'Couleur de l’interface';
 
   @override
-  String get deletingAFolder => 'Suppression d’un dossier';
+  String get interactionWithFolders => 'Interaction avec les dossiers';
 
   @override
   String get exportAndImportFoldersInExcel => 'Exporter/Importer un dossier';
@@ -726,5 +795,5 @@ class AppLocalizationsFr extends AppLocalizations {
   String get privacyPolicy => 'Politique de confidentialité';
 
   @override
-  String get appVersion => 'Version 1.0.1';
+  String get appVersion => 'Version 1.2.2';
 }

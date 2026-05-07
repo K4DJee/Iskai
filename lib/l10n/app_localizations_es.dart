@@ -9,13 +9,13 @@ class AppLocalizationsEs extends AppLocalizations {
   AppLocalizationsEs([String locale = 'es']) : super(locale);
 
   @override
-  String get languageNameEn => 'Inglés';
+  String get languageNameEn => 'English';
 
   @override
-  String get languageNameRu => 'Ruso';
+  String get languageNameRu => 'Русский';
 
   @override
-  String get languageNameFr => 'Francés';
+  String get languageNameFr => 'Français';
 
   @override
   String get languageNameEs => 'Español';
@@ -228,6 +228,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get achievementsPage => 'Logros';
 
   @override
+  String get achievementReceived => 'Logro recibido! ';
+
+  @override
   String get privacyPolicyTitle => 'Política de privacidad';
 
   @override
@@ -417,7 +420,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get achievementName10 => 'Maestro';
 
   @override
-  String get achievementDescription10 => 'Aprende 100 palabras.';
+  String get achievementDescription10 => 'Aprende 125 palabras.';
 
   @override
   String get achievementName11 => 'Gurú social';
@@ -429,10 +432,76 @@ class AppLocalizationsEs extends AppLocalizations {
   String get unlockedStatus => 'desbloqueado';
 
   @override
+  String get errorFetchUrl => 'No se pudo abrir el enlace';
+
+  @override
+  String get dbLoading => 'Carga...';
+
+  @override
+  String get dbSize => 'Tamaño de la base de datos:';
+
+  @override
+  String get warningTitleInModal => 'Advertencia';
+
+  @override
+  String get deleteDbTitle => 'Eliminar base de datos';
+
+  @override
+  String get deleteDbDescInModal => '¿Estás seguro de que quieres eliminar la base de datos? Todos los datos serán borrados irremediablemente.';
+
+  @override
+  String get doNotDeleteDbBtnInModal => 'No eliminar';
+
+  @override
+  String get deleteDbBtnInModal => 'Eliminar';
+
+  @override
+  String get notNowBtnInModal => 'Ahora no.';
+
+  @override
+  String get writeReviewBtnInModal => 'Escribe una opinión';
+
+  @override
+  String get importantTitleInModal => 'Información importante';
+
+  @override
+  String get rateUsDescInModal => '¿Te gusta Iskai? Por favor califíquenos en RuStore. Su soporte afecta directamente la frecuencia de las actualizaciones.';
+
+  @override
+  String get displayNotificationsTitle => 'Mostrar notificaciones de la aplicación';
+
+  @override
+  String get interactionWithTheDB => 'Interacción con la base de datos';
+
+  @override
+  String get wordsPassed => 'Palabras pasadas:';
+
+  @override
   String get streakTitle => 'consecutivos';
 
   @override
   String get comparisonMinigameTitle => 'Comparación y traducción de palabras';
+
+  @override
+  String get comparisonPositionTitle => 'Haga coincidir la palabra correctamente con su traducción.';
+
+  @override
+  String get lackOfChartTitle => 'Aún no tiene estadísticas';
+
+  @override
+  String get wordAreOver => 'Se acabaron las palabras';
+
+  @override
+  String get errorUpdAch => 'Error al actualizar logros';
+
+  @override
+  String get wrongWordTryAgain => 'Palabra incorrecta, inténtalo de nuevo.';
+
+  @override
+  String get errSwitchingToTheNextTransl => 'Error al pasar a la siguiente traducción de la palabra:';
+
+  @override
+  String get trainingIsOver => 'Se acabó el entrenamiento.';
 
   @override
   String get stillInDevelopment => 'Aún en desarrollo';
@@ -702,7 +771,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get interfaceAppColor => 'Color de la interfaz';
 
   @override
-  String get deletingAFolder => 'Eliminando carpeta';
+  String get interactionWithFolders => 'Interacción con carpetas';
 
   @override
   String get exportAndImportFoldersInExcel => 'Exportar e importar carpeta';
@@ -726,5 +795,5 @@ class AppLocalizationsEs extends AppLocalizations {
   String get privacyPolicy => 'Política de privacidad';
 
   @override
-  String get appVersion => 'Versión 1.0.1';
+  String get appVersion => 'Versión 1.2.2';
 }

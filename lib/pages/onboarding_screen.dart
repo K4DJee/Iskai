@@ -36,6 +36,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text('Achievement is unlock')));
+      
     } else if (!result.success) {
       ScaffoldMessenger.of(
         context,

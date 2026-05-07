@@ -108,19 +108,19 @@ abstract class AppLocalizations {
   /// No description provided for @languageNameRu.
   ///
   /// In en, this message translates to:
-  /// **'Russian'**
+  /// **'Русский'**
   String get languageNameRu;
 
   /// No description provided for @languageNameFr.
   ///
   /// In en, this message translates to:
-  /// **'French'**
+  /// **'Français'**
   String get languageNameFr;
 
   /// No description provided for @languageNameEs.
   ///
   /// In en, this message translates to:
-  /// **'Spanish'**
+  /// **'Español'**
   String get languageNameEs;
 
   /// No description provided for @appTitle.
@@ -240,7 +240,7 @@ abstract class AppLocalizations {
   /// No description provided for @selectFolder.
   ///
   /// In en, this message translates to:
-  /// **'Select folder'**
+  /// **'Select a folder'**
   String get selectFolder;
 
   /// No description provided for @nameFolder.
@@ -536,6 +536,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Achievements'**
   String get achievementsPage;
+
+  /// No description provided for @achievementReceived.
+  ///
+  /// In en, this message translates to:
+  /// **'Achievement received!'**
+  String get achievementReceived;
 
   /// No description provided for @privacyPolicyTitle.
   ///
@@ -918,7 +924,7 @@ abstract class AppLocalizations {
   /// No description provided for @achievementDescription10.
   ///
   /// In en, this message translates to:
-  /// **'Learn 100 words.'**
+  /// **'Learn 125 words.'**
   String get achievementDescription10;
 
   /// No description provided for @achievementName11.
@@ -939,6 +945,96 @@ abstract class AppLocalizations {
   /// **'Unlocked'**
   String get unlockedStatus;
 
+  /// No description provided for @errorFetchUrl.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t open the link'**
+  String get errorFetchUrl;
+
+  /// No description provided for @dbLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get dbLoading;
+
+  /// No description provided for @dbSize.
+  ///
+  /// In en, this message translates to:
+  /// **'Database size:'**
+  String get dbSize;
+
+  /// No description provided for @warningTitleInModal.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning'**
+  String get warningTitleInModal;
+
+  /// No description provided for @deleteDbTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete the database'**
+  String get deleteDbTitle;
+
+  /// No description provided for @deleteDbDescInModal.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete the database? All data will be permanently deleted.'**
+  String get deleteDbDescInModal;
+
+  /// No description provided for @doNotDeleteDbBtnInModal.
+  ///
+  /// In en, this message translates to:
+  /// **'Do not delete'**
+  String get doNotDeleteDbBtnInModal;
+
+  /// No description provided for @deleteDbBtnInModal.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get deleteDbBtnInModal;
+
+  /// No description provided for @notNowBtnInModal.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get notNowBtnInModal;
+
+  /// No description provided for @writeReviewBtnInModal.
+  ///
+  /// In en, this message translates to:
+  /// **'Write a review'**
+  String get writeReviewBtnInModal;
+
+  /// No description provided for @importantTitleInModal.
+  ///
+  /// In en, this message translates to:
+  /// **'Important information'**
+  String get importantTitleInModal;
+
+  /// No description provided for @rateUsDescInModal.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you like Iskai? Please rate us in RuStore. Your support directly affects the frequency of updates.'**
+  String get rateUsDescInModal;
+
+  /// No description provided for @displayNotificationsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Displaying app notifications'**
+  String get displayNotificationsTitle;
+
+  /// No description provided for @interactionWithTheDB.
+  ///
+  /// In en, this message translates to:
+  /// **'Interaction with the database'**
+  String get interactionWithTheDB;
+
+  /// No description provided for @wordsPassed.
+  ///
+  /// In en, this message translates to:
+  /// **'Words passed:'**
+  String get wordsPassed;
+
   /// No description provided for @streakTitle.
   ///
   /// In en, this message translates to:
@@ -950,6 +1046,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Word comparison and translation'**
   String get comparisonMinigameTitle;
+
+  /// No description provided for @comparisonPositionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Match the word correctly with its translation.'**
+  String get comparisonPositionTitle;
+
+  /// No description provided for @lackOfChartTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You don\'t have any statistics yet'**
+  String get lackOfChartTitle;
+
+  /// No description provided for @wordAreOver.
+  ///
+  /// In en, this message translates to:
+  /// **'The words are over'**
+  String get wordAreOver;
+
+  /// No description provided for @errorUpdAch.
+  ///
+  /// In en, this message translates to:
+  /// **'Error updating achievement'**
+  String get errorUpdAch;
+
+  /// No description provided for @wrongWordTryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong word, try again.'**
+  String get wrongWordTryAgain;
+
+  /// No description provided for @errSwitchingToTheNextTransl.
+  ///
+  /// In en, this message translates to:
+  /// **'Error switching to the next word translation:'**
+  String get errSwitchingToTheNextTransl;
+
+  /// No description provided for @trainingIsOver.
+  ///
+  /// In en, this message translates to:
+  /// **'The training session is over.'**
+  String get trainingIsOver;
 
   /// No description provided for @stillInDevelopment.
   ///
@@ -1302,7 +1440,7 @@ abstract class AppLocalizations {
   /// No description provided for @highDifficulty.
   ///
   /// In en, this message translates to:
-  /// **'High'**
+  /// **'Hard'**
   String get highDifficulty;
 
   /// No description provided for @mediumDifficulty.
@@ -1485,11 +1623,11 @@ abstract class AppLocalizations {
   /// **'The color of the app interface'**
   String get interfaceAppColor;
 
-  /// No description provided for @deletingAFolder.
+  /// No description provided for @interactionWithFolders.
   ///
   /// In en, this message translates to:
-  /// **'Deleting a folder'**
-  String get deletingAFolder;
+  /// **'Interaction with folders'**
+  String get interactionWithFolders;
 
   /// No description provided for @exportAndImportFoldersInExcel.
   ///
@@ -1536,7 +1674,7 @@ abstract class AppLocalizations {
   /// No description provided for @appVersion.
   ///
   /// In en, this message translates to:
-  /// **'Version 1.0.1'**
+  /// **'Version 1.2.2'**
   String get appVersion;
 }
 

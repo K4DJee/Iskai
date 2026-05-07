@@ -12,13 +12,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get languageNameEn => 'English';
 
   @override
-  String get languageNameRu => 'Russian';
+  String get languageNameRu => 'Русский';
 
   @override
-  String get languageNameFr => 'French';
+  String get languageNameFr => 'Français';
 
   @override
-  String get languageNameEs => 'Spanish';
+  String get languageNameEs => 'Español';
 
   @override
   String get appTitle => 'Iskai';
@@ -78,7 +78,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get createNewFolder => 'Creating new folder';
 
   @override
-  String get selectFolder => 'Select folder';
+  String get selectFolder => 'Select a folder';
 
   @override
   String get nameFolder => 'Folder name';
@@ -226,6 +226,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get achievementsPage => 'Achievements';
+
+  @override
+  String get achievementReceived => 'Achievement received!';
 
   @override
   String get privacyPolicyTitle => 'Privacy Policy';
@@ -417,7 +420,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get achievementName10 => 'Master';
 
   @override
-  String get achievementDescription10 => 'Learn 100 words.';
+  String get achievementDescription10 => 'Learn 125 words.';
 
   @override
   String get achievementName11 => 'Social Guru';
@@ -429,10 +432,76 @@ class AppLocalizationsEn extends AppLocalizations {
   String get unlockedStatus => 'Unlocked';
 
   @override
+  String get errorFetchUrl => 'Couldn\'t open the link';
+
+  @override
+  String get dbLoading => 'Loading...';
+
+  @override
+  String get dbSize => 'Database size:';
+
+  @override
+  String get warningTitleInModal => 'Warning';
+
+  @override
+  String get deleteDbTitle => 'Delete the database';
+
+  @override
+  String get deleteDbDescInModal => 'Are you sure you want to delete the database? All data will be permanently deleted.';
+
+  @override
+  String get doNotDeleteDbBtnInModal => 'Do not delete';
+
+  @override
+  String get deleteDbBtnInModal => 'Delete';
+
+  @override
+  String get notNowBtnInModal => 'Not now';
+
+  @override
+  String get writeReviewBtnInModal => 'Write a review';
+
+  @override
+  String get importantTitleInModal => 'Important information';
+
+  @override
+  String get rateUsDescInModal => 'Do you like Iskai? Please rate us in RuStore. Your support directly affects the frequency of updates.';
+
+  @override
+  String get displayNotificationsTitle => 'Displaying app notifications';
+
+  @override
+  String get interactionWithTheDB => 'Interaction with the database';
+
+  @override
+  String get wordsPassed => 'Words passed:';
+
+  @override
   String get streakTitle => 'in a row';
 
   @override
   String get comparisonMinigameTitle => 'Word comparison and translation';
+
+  @override
+  String get comparisonPositionTitle => 'Match the word correctly with its translation.';
+
+  @override
+  String get lackOfChartTitle => 'You don\'t have any statistics yet';
+
+  @override
+  String get wordAreOver => 'The words are over';
+
+  @override
+  String get errorUpdAch => 'Error updating achievement';
+
+  @override
+  String get wrongWordTryAgain => 'Wrong word, try again.';
+
+  @override
+  String get errSwitchingToTheNextTransl => 'Error switching to the next word translation:';
+
+  @override
+  String get trainingIsOver => 'The training session is over.';
 
   @override
   String get stillInDevelopment => 'Still in development';
@@ -609,7 +678,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noMoreWords => 'No more words';
 
   @override
-  String get highDifficulty => 'High';
+  String get highDifficulty => 'Hard';
 
   @override
   String get mediumDifficulty => 'Medium';
@@ -702,7 +771,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get interfaceAppColor => 'The color of the app interface';
 
   @override
-  String get deletingAFolder => 'Deleting a folder';
+  String get interactionWithFolders => 'Interaction with folders';
 
   @override
   String get exportAndImportFoldersInExcel => 'Export and import folder';
@@ -726,5 +795,5 @@ class AppLocalizationsEn extends AppLocalizations {
   String get privacyPolicy => 'Privacy Policy';
 
   @override
-  String get appVersion => 'Version 1.0.1';
+  String get appVersion => 'Version 1.2.2';
 }

@@ -1,8 +1,12 @@
+import 'dart:math';
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:iskai/database/sqfliteDatabase.dart';
 import 'package:iskai/l10n/app_localizations.dart';
+import 'package:iskai/models/daily_streak_info.dart';
 import 'package:iskai/models/statistics.dart';
+import 'package:iskai/services/databaseService.dart';
 
 class StatisticsPage extends StatefulWidget {
   final int selectedFolderId;
@@ -15,17 +19,20 @@ class StatisticsPage extends StatefulWidget {
 class _StatisticsPageState extends State<StatisticsPage> {
   List<FlSpot> spots = [];
   List<String> dateLabels = [];
-  List<Statistics> stats = [];
+  List<Statistics> stats
+   = [];
   int allWordsLearned = 0;
   double averageAnswersPerDay = 0;
   int allCorrectWords = 0;
   int allIncorrectWords = 0;
   int allAnswers = 0;
+  DatabaseService _dbService = new DatabaseService();
+  DailyStreakInfo streakInfo = DailyStreakInfo(currentStreak: 0, maxDailyStreak: 0);
 
   bool _isLoading = true;
   void loadData() async {
     final db = SQLiteDatabase.instance;
-    final List<Statistics> stats = await db.getStatistics(widget.selectedFolderId);
+     stats = await db.getStatistics(widget.selectedFolderId);
     final generatedSpots = stats.asMap().entries.map((entry) {
       final index = entry.key.toDouble();
       final stat = entry.value;
@@ -38,30 +45,30 @@ class _StatisticsPageState extends State<StatisticsPage> {
       final month = date.month.toString().padLeft(2, '0');
       return '$day.$month';
     }).toList();
+
+    
     setState(() {
-      allWordsLearned = stats
-          .map((stat) => stat.wordsLearnedToday!)
-          .reduce((value, element) => value + element);
-      allAnswers = stats
-          .map((stat) => stat.amountAnswersPerDay!)
-          .reduce((value, element) => value + element);
-      allCorrectWords = stats
-          .map((stat) => stat.amountCorrectAnswers!)
-          .reduce((value, element) => value + element);
-      allIncorrectWords = stats
-          .map((stat) => stat.amountIncorrectAnswers!)
-          .reduce((value, element) => value + element);
-      averageAnswersPerDay = stats.isNotEmpty ? allAnswers / stats.length : 0;
-      spots = generatedSpots;
-      dateLabels = generatedLabels;
-      _isLoading = false;
-    });
+  allWordsLearned = stats.fold(0, (sum, stat) => sum + (stat.wordsLearnedToday ?? 0));
+  allAnswers = stats.fold(0, (sum, stat) => sum + (stat.amountAnswersPerDay ?? 0));
+  allCorrectWords = stats.fold(0, (sum, stat) => sum + (stat.amountCorrectAnswers ?? 0));
+  allIncorrectWords = stats.fold(0, (sum, stat) => sum + (stat.amountIncorrectAnswers ?? 0));
+  
+  averageAnswersPerDay = stats.isNotEmpty ? allAnswers / stats.length : 0;
+  spots = generatedSpots;
+  dateLabels = generatedLabels;
+  _isLoading = false;
+});
+  }
+
+  Future<void> getStreakInfo()async{
+    streakInfo = await _dbService.getDailyStreakInfo();
   }
 
   @override
   void initState() {
     super.initState();
     loadData();
+    getStreakInfo();
   }
 
   @override
@@ -74,7 +81,10 @@ class _StatisticsPageState extends State<StatisticsPage> {
           SizedBox(
             height: 175,
             child: _isLoading == false
-                ? SizedBox(
+                ? 
+                !stats.isEmpty
+                ?
+                SizedBox(
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: SizedBox(
@@ -144,6 +154,11 @@ class _StatisticsPageState extends State<StatisticsPage> {
                       ),
                     ),
                   )
+                  : SizedBox(
+                    child: Center(
+                      child: Text(AppLocalizations.of(context)!.lackOfChartTitle, style: TextStyle(fontWeight: FontWeight.bold),),
+                    ),
+                  )
                 : Center(child: CircularProgressIndicator()),
           ),
           Expanded(
@@ -168,6 +183,18 @@ class _StatisticsPageState extends State<StatisticsPage> {
                 ListTile(
                   title: Text(
                     '${AppLocalizations.of(context)!.averageNumberTitle} ${averageAnswersPerDay.toStringAsFixed(2)}',
+                  ),
+                ),
+                const Divider(height: 1, thickness: 1, color: Colors.grey),
+                ListTile(
+                  title: Text(
+                    'Max daily streak: ${streakInfo.maxDailyStreak} ',
+                  ),
+                ),
+                const Divider(height: 1, thickness: 1, color: Colors.grey),
+                ListTile(
+                  title: Text(
+                    'Current streak:   ${streakInfo.currentStreak}',
                   ),
                 ),
                 const Divider(height: 1, thickness: 1, color: Colors.grey),

@@ -31,7 +31,7 @@ class AdService {
 
   _createBanner(BuildContext context){
     return BannerAd(
-      adUnitId: 'demo-banner-yandex',
+      adUnitId: 'R-M-18399243-1',
        adSize: getAdSize(context),
        adRequest: const AdRequest(),
        onAdLoaded: (){

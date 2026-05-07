@@ -48,7 +48,9 @@ class _folderActionsPageState extends State<folderActionsPage>{
       }
       else{
         // print('Папка с ID #$id была успешно удалена');
+        
         await _loadFolders();
+
       }
     }
     catch(e){

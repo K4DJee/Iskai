@@ -1,7 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:iskai/helpers/showExitDialog.dart';
 import 'package:iskai/l10n/app_localizations.dart';
+import 'package:iskai/models/statistics.dart';
 import 'package:iskai/models/words.dart';
 import 'package:iskai/services/databaseService.dart';
 
@@ -25,6 +28,9 @@ class _ComparisonMinigameState extends State<ComparisonMinigame> {
   List<String> rightColumn = [];
   String? _wrongLeft;
   String? _wrongRight;
+  int amountCorrectAnswers = 0,
+      amountIncorrectAnswers = 0,
+      amountAnswersPerDay = 0;
 
   Future<bool> getWords() async {
     try {
@@ -37,9 +43,16 @@ class _ComparisonMinigameState extends State<ComparisonMinigame> {
         page: page,
         limit: 6,
       );
-      if (pageCards == null || pageCards!.isEmpty) return false;
+      if (pageCards == null || pageCards!.isEmpty) {
+        setState(() {
+          _isLoading = false;
+        });
+        return false;
+      }
+      ;
 
       userWords.addAll(pageCards!);
+      userWords.shuffle();
       page++;
 
       userWords.shuffle(Random());
@@ -79,9 +92,9 @@ class _ComparisonMinigameState extends State<ComparisonMinigame> {
       bool isWords = await getWords();
       if (!isWords) {
         print('Слова закончились');
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('Слова закончились')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(AppLocalizations.of(context)!.wordAreOver)),
+        );
       }
       return;
     }
@@ -112,12 +125,18 @@ class _ComparisonMinigameState extends State<ComparisonMinigame> {
 
         _selectedLeftWord = null;
         _selectedRightWord = null;
+
+        amountAnswersPerDay++;
+        amountCorrectAnswers++;
       });
     } else {
       print('Слово с переводом не совпало');
       setState(() {
         _wrongLeft = _selectedLeftWord;
         _wrongRight = _selectedRightWord;
+
+        amountAnswersPerDay++;
+        amountIncorrectAnswers++;
       });
 
       Future.delayed(Duration(milliseconds: 500), () {
@@ -139,82 +158,169 @@ class _ComparisonMinigameState extends State<ComparisonMinigame> {
     getWords();
   }
 
+  Future<void> _handleBackPress() async {
+    if (amountAnswersPerDay == 0) {
+      if (context.mounted) Navigator.pop(context);
+      return;
+    }
+
+    final shouldExit = await showExitDialog(context);
+    if (shouldExit == true && context.mounted) {
+      HapticFeedback.heavyImpact();
+
+      await _dbService.createStatisticDay(
+                widget.selectedFolderId,
+                Statistics(
+                  folderId: widget.selectedFolderId,
+                  amountCorrectAnswers: amountCorrectAnswers,
+                  amountIncorrectAnswers: amountIncorrectAnswers,
+                  amountAnswersPerDay: amountAnswersPerDay,
+                  createdAt: DateTime.now().toString(),
+                ),
+              );
+
+     if (context.mounted) Navigator.pop(context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (!didPop) _handleBackPress();
+      },
+      child: 
+    Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.comparisonMinigameTitle),
+        leading: IconButton(
+          onPressed: _handleBackPress,
+          icon: Icon(Icons.close),
+        ),
       ),
       body: Stack(
         children: [
           Center(
             child: !_isLoading
-                ? Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Column(
-                            children: leftColumn.map((word) {
-                              return GestureDetector(
-                                child: SizedBox(
-                                  height: 60,
-                                  width: 180,
-                                  child: Card(
-                                  color: _wrongLeft == word
-                                      ? Colors.red.shade300
-                                      : _selectedLeftWord == word
-                                      ? Colors.blue.shade100
-                                      : Colors.white,
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      vertical: 14,
-                                      horizontal: 24,
-                                    ),
-                                    child: Text(
-                                      word,
-                                      style: TextStyle(fontSize: 16),textAlign: TextAlign.center,
-                                    ),
-                                  ),
+                ? pageCards != null
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Column(
+                                  children: leftColumn.map((word) {
+                                    return GestureDetector(
+                                      child: SizedBox(
+                                        height: 60,
+                                        width: 180,
+                                        child: Card(
+                                          color: _wrongLeft == word
+                                              ? Colors.red.shade300
+                                              : _selectedLeftWord == word
+                                              ? Colors.blue.shade100
+                                              : Theme.of(context).brightness ==
+                                                    Brightness.dark
+                                              ? Colors.grey
+                                              : Colors.white,
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                              vertical: 14,
+                                              horizontal: 24,
+                                            ),
+                                            child: Text(
+                                              word,
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                color: Colors.black,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      onTap: () => selectWord(word),
+                                    );
+                                  }).toList(),
                                 ),
-                                ), 
-                                onTap: () => selectWord(word),
-                              );
-                            }).toList(),
-                          ),
-                          Column(
-                            children: rightColumn.map((word) {
-                              return GestureDetector(
-                                child: SizedBox(
-                                  height: 60,
-                                  width: 180,
-                                  child: Card(
-                                  color: _wrongRight == word
-                                      ? Colors.red.shade300
-                                      : _selectedRightWord == word
-                                      ? Colors.blue.shade100
-                                      : Colors.white,
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      vertical: 14,
-                                      horizontal: 24,
-                                    ),
-                                    child: Text(
-                                      word,
-                                      style: TextStyle(fontSize: 16), textAlign: TextAlign.center,
-                                    ),
-                                  ),
+                                Column(
+                                  children: rightColumn.map((word) {
+                                    return GestureDetector(
+                                      child: SizedBox(
+                                        height: 60,
+                                        width: 180,
+                                        child: Card(
+                                          color: _wrongRight == word
+                                              ? Colors.red.shade300
+                                              : _selectedRightWord == word
+                                              ? Colors.blue.shade100
+                                              : Theme.of(context).brightness ==
+                                                    Brightness.dark
+                                              ? Colors.grey
+                                              : Colors.white,
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                              vertical: 14,
+                                              horizontal: 24,
+                                            ),
+                                            child: Text(
+                                              word,
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                color: Colors.black,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      onTap: () => selectTranslate(word),
+                                    );
+                                  }).toList(),
                                 ),
+                              ],
+                            ),
+                          ],
+                        )
+                      : Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Card(
+                              child: Padding(
+                                padding: EdgeInsets.all(16),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      AppLocalizations.of(
+                                        context,
+                                      )!.statisticsPage,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      '${AppLocalizations.of(context)!.totalWords} $amountAnswersPerDay',
+                                    ),
+                                    Text(
+                                      '${AppLocalizations.of(context)!.countOfcorrectWords} $amountCorrectAnswers',
+                                      style: TextStyle(
+                                        color: Colors.green[400],
+                                      ),
+                                    ),
+                                    Text(
+                                      '${AppLocalizations.of(context)!.countOfMistakes} $amountIncorrectAnswers',
+                                      style: TextStyle(color: Colors.red),
+                                    ),
+                                  ],
                                 ),
-                                onTap: () => selectTranslate(word),
-                              );
-                            }).toList(),
-                          ),
-                        ],
-                      ),
-                    ],
-                  )
+                              ),
+                            ),
+                          ],
+                        )
                 : CircularProgressIndicator(),
           ),
           Positioned(
@@ -222,13 +328,13 @@ class _ComparisonMinigameState extends State<ComparisonMinigame> {
             right: 0,
             bottom: 50,
             child: Text(
-              'Сопоставьте правильно слово с его переводом',
+              AppLocalizations.of(context)!.comparisonPositionTitle,
               style: TextStyle(fontSize: 16),
               textAlign: TextAlign.center,
             ),
           ),
         ],
       ),
-    );
+    ));
   }
 }

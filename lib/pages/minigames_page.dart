@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:iskai/l10n/app_localizations.dart';
-import 'package:iskai/pages/allFlashCardsPage.dart';
-import 'package:iskai/pages/flashCardsPage.dart';
-import 'package:iskai/pages/timeFlashcardsPage.dart';
+import 'package:iskai/pages/all_flashcards_page.dart';
+import 'package:iskai/pages/comparison_minigame.dart';
+import 'package:iskai/pages/flashcards_page.dart';
+import 'package:iskai/pages/time_flashcards_page.dart';
 
 class MinigamesPage extends StatefulWidget {
   final int selectedFolderId;
@@ -19,7 +20,7 @@ class _MinigamesPageState extends State<MinigamesPage>{
     final List<Map<String, dynamic>> minigames = [
       {
         "title": AppLocalizations.of(context)!.educationAnki,
-        "image": "assets/imgs/cards-svgrepo-com.png",
+        "image": "assets/imgs/anki.png",
         "page": () => FlashcardPage(selectedFolderId: widget.selectedFolderId,)
       },
       {
@@ -32,6 +33,11 @@ class _MinigamesPageState extends State<MinigamesPage>{
         "image": "assets/imgs/timer-icon.png",
         "page": ()=> TimeFlashcardsPage(selectedFolderId: widget.selectedFolderId,)
       },
+      {
+        "title": AppLocalizations.of(context)!.comparisonMinigameTitle,
+        "image": "assets/imgs/comparison3.png",
+        "page": ()=> ComparisonMinigame(selectedFolderId: widget.selectedFolderId,)
+      }
       
      ];
     return Scaffold(
